@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <sstream>
 #include <fstream>
 
 
@@ -12,8 +12,15 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  std::fstream input(argv[1], std::ios::in);
+  std::string contents;
+  { 
+    std::stringstream contents_stream;
+    std::fstream input(argv[1], std::ios::in);
+    contents_stream << input.rdbuf();
+    contents = contents_stream.str();
+  }
 
-  std::cout << argv[1] << std::endl;
+  std::cout << contents << std::endl;
+
   return EXIT_SUCCESS;
 }
