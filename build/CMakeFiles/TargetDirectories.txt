@@ -1,0 +1,3 @@
+/home/ivan/compiler/build/CMakeFiles/compiler.dir
+/home/ivan/compiler/build/CMakeFiles/edit_cache.dir
+/home/ivan/compiler/build/CMakeFiles/rebuild_cache.dir

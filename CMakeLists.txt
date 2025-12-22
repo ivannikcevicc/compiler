@@ -4,4 +4,4 @@ project(compiler)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(hydro src/main.cpp)
+add_executable(compiler src/main.cpp)
