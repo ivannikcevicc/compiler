@@ -12,12 +12,54 @@ enum class TokenType {
 
 struct Token {
   TokenType type;
-  std::optional<std::string> value;
+  std::optional<std::string> value {};
 };  
 
 std::vector<Token> tokenize(const std::string& str) {
-  for(char c:str) {
-    std::cout << c << std::endl;
+  std::vector<Token> tokens;
+  std::string buf;
+  for(int i=0; i<str.length(); i++) {
+      char c= str.at(i);
+      if(std::isalpha(c)) {
+        buf.push_back(c);
+        i++;
+        while (std::isalnum(str.at(i))) {
+          buf.push_back(str.at(i));
+          i++;
+        }
+        i--;
+
+        if(buf == "return") {
+          tokens.push_back({.type = TokenType::_return, .value = std::nullopt});
+          buf.clear();
+          continue;
+        } else {
+          std::cerr << "You messed up!: " << buf << std::endl;
+          exit(EXIT_FAILURE);
+        }
+      }
+      else if(std::isdigit(c)) {
+        buf.push_back(c);
+        i++;
+        while (std::isdigit(str.at(c))) {
+          buf.push_back(str.at(c));
+          i++;
+        }
+        i--;
+
+        tokens.push_back({.type = TokenType::int_lit, .value = buf});
+        buf.clear();
+        continue;
+      }
+      else if (c==';') {
+        tokens.push_back({.type = TokenType::semi});
+      }
+      else if(std::isspace(c)) {
+        continue;
+      } else {
+        std::cerr << "You messed up!: " << c << std::endl;
+        exit(EXIT_FAILURE);
+      }
   }
 };
 
