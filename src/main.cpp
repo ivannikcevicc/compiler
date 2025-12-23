@@ -41,8 +41,8 @@ std::vector<Token> tokenize(const std::string& str) {
       else if(std::isdigit(c)) {
         buf.push_back(c);
         i++;
-        while (std::isdigit(str.at(c))) {
-          buf.push_back(str.at(c));
+        while (std::isdigit(str.at(i))) {
+          buf.push_back(str.at(i));
           i++;
         }
         i--;
@@ -61,6 +61,8 @@ std::vector<Token> tokenize(const std::string& str) {
         exit(EXIT_FAILURE);
       }
   }
+
+  return tokens;
 };
 
 
@@ -81,7 +83,8 @@ int main(int argc, char* argv[]) {
     contents = contents_stream.str();
   }
 
-  tokenize(contents);
+  std::vector<Token> thing = tokenize(contents);
+
 
   return EXIT_SUCCESS;
 }
