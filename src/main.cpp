@@ -112,6 +112,9 @@ int main(int argc, char* argv[]) {
     file << tokens_to_asm(tokens);
   }
 
+  system("nasm -f elf64 out.asm");
+  system("ld -o out out.o");
+
 
   return EXIT_SUCCESS;
 }
