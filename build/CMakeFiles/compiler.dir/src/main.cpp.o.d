@@ -165,4 +165,8 @@ CMakeFiles/compiler.dir/src/main.cpp.o: /home/ivan/compiler/src/main.cpp \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc
+ /usr/include/c++/11/bits/vector.tcc \
+ /home/ivan/compiler/src/./tokenization.hpp \
+ /home/ivan/compiler/src/././token.hpp \
+ /home/ivan/compiler/src/./parser.hpp \
+ /home/ivan/compiler/src/./generation.hpp

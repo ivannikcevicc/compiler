@@ -2,20 +2,11 @@
 #include <iostream>
 #include <vector>
 #include <optional>
+#include "./token.hpp"
 
 #pragma once
 
 
-enum class TokenType {
-  exit,
-  int_lit,
-  semi
-};
-
-struct Token {
-  TokenType type;
-  std::optional<std::string> value {};
-};  
 
 class Tokenizer {
   public:
@@ -35,7 +26,6 @@ class Tokenizer {
             if(buf == "exit") {
               tokens.push_back({.type = TokenType::exit});
               buf.clear();
-              continue;
             } else {
               throw std::runtime_error("You messed up!: " + buf);
               exit(EXIT_FAILURE);
@@ -53,12 +43,12 @@ class Tokenizer {
           }
 
           else if (peak().value() == ';') {
+            consume();
             tokens.push_back({.type = TokenType::semi});
-            continue;
           }
 
           else if (std::isspace(peak().value())) {
-            continue;
+            consume();
           }
 
           else {
@@ -71,18 +61,19 @@ class Tokenizer {
       }
 
   private:
-
-    std::optional<char> peak(int ahead = 1) {
-      if(m_index + ahead >= m_src.length()) {
-        return {};
-      } else {
-        return m_src.at(m_index + ahead);
-      }
+    [[nodiscard]] inline std::optional<char> peak(const size_t offset = 0) const
+    {
+        if (m_index + offset >= m_src.length()) {
+            return {};
+        }
+        return m_src.at(m_index + offset);
     }
 
-    char consume () {
-      return m_src.at(m_index++);
+    inline char consume()
+    {
+        return m_src.at(m_index++);
     }
+
     const std::string m_src;
-    int m_index = 0;
+    size_t m_index = 0;
 };
